@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['Platelet', 'RBC', 'WBC']
+
+roboflow:
+  workspace: nqdattn24022005-gmail-com
+  project: bccd_detection
+  version: 3
+  license: Private
+  url: https://app.roboflow.com/nqdattn24022005-gmail-com/bccd_detection/3

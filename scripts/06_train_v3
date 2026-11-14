@@ -1,0 +1,114 @@
+
+from pathlib import Path
+import multiprocessing
+
+from ultralytics import YOLO
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+DATA_YAML = ROOT / "dataset_v2" / "data.yaml"
+
+OUTPUT_DIR = ROOT / "runs" / "bccd"
+
+
+def main():
+
+    # Kiểm tra dataset
+    if not DATA_YAML.is_file():
+        raise FileNotFoundError(
+            f"Không tìm thấy data.yaml: {DATA_YAML}"
+        )
+
+    print("=" * 50)
+    print("TRAINING YOLOv8n V3")
+    print(f"Dataset: {DATA_YAML}")
+    print("GPU: NVIDIA RTX 3050 Ti")
+    print("=" * 50)
+
+    # Khởi tạo từ trọng số YOLOv8n gốc
+    model = YOLO("yolov8n.pt")
+
+    # Huấn luyện
+    model.train(
+        data=str(DATA_YAML),
+        epochs=100,
+        imgsz=640,
+        batch=4,
+        device=0,
+        workers=0,
+        patience=20,
+        amp=True,
+        cache=False,
+        project=str(OUTPUT_DIR),
+        name="yolov8n_v3",
+        exist_ok=False,
+        save=True,
+        plots=True,
+        seed=42
+    )
+
+    print("\nHoàn thành huấn luyện YOLOv8n V2!")
+    print(f"Kiểm tra kết quả tại: {OUTPUT_DIR}")
+
+
+if __name__ == "__main__":
+    multiprocessing.freeze_support()
+    main()
+
+from pathlib import Path
+import multiprocessing
+
+from ultralytics import YOLO
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+DATA_YAML = ROOT / "dataset_v3" / "data.yaml"
+
+OUTPUT_DIR = ROOT / "runs" / "bccd"
+
+
+def main():
+
+    # Kiểm tra dataset
+    if not DATA_YAML.is_file():
+        raise FileNotFoundError(
+            f"Không tìm thấy data.yaml: {DATA_YAML}"
+        )
+
+    print("=" * 50)
+    print("TRAINING YOLOv8n V3")
+    print(f"Dataset: {DATA_YAML}")
+    print("GPU: NVIDIA RTX 3050 Ti")
+    print("=" * 50)
+
+    # Khởi tạo từ trọng số YOLOv8n gốc
+    model = YOLO("yolov8n.pt")
+
+    # Huấn luyện
+    model.train(
+        data=str(DATA_YAML),
+        epochs=100,
+        imgsz=640,
+        batch=4,
+        device=0,
+        workers=0,
+        patience=20,
+        amp=True,
+        cache=False,
+        project=str(OUTPUT_DIR),
+        name="yolov8n_v3",
+        exist_ok=False,
+        save=True,
+        plots=True,
+        seed=42
+    )
+
+    print("\nHoàn thành huấn luyện YOLOv8n V3!")
+    print(f"Kiểm tra kết quả tại: {OUTPUT_DIR}")
+
+
+if __name__ == "__main__":
+    multiprocessing.freeze_support()
+    main()
